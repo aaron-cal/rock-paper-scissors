@@ -1,1 +1,1 @@
-# rock-paper-scissors
+# rock-paper-scissors able to be played in console for now
