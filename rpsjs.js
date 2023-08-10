@@ -1,11 +1,10 @@
-// first need to generate a random number,
-const randomNum = Math.random();
-// then assign each number a rock, paper, or scissor value with equl prob
-// then have the value that is chosen be the computerChoice
+let computerSelection = getComputerChoice();
 
-const computerSelection = getComputerChoice()
+let randomNum = Math.random();
 
 function getComputerChoice() {
+
+    let randomNum = Math.random()
 
     let computerSelection = '';
 
@@ -21,14 +20,13 @@ function getComputerChoice() {
             computerSelection='scissors';
         }
 
+        console.log(computerSelection);
+
         return computerSelection
 }
 
-console.log(getComputerChoice());
 
-// prompt the player to make a selection
-
-const playerSelection = getPlayerChoice()
+let playerSelection = getPlayerChoice()
 
 function getPlayerChoice() {
     
@@ -48,11 +46,11 @@ function getPlayerChoice() {
 
 }
 
-// compare the player selection to the comp selection
 
-const result = playRound(playerSelection, computerSelection)
+let result = playRound(playerSelection, computerSelection)
 
 function playRound(playerSelection, computerSelection) {
+
 
     let result ='';
 
@@ -60,7 +58,7 @@ function playRound(playerSelection, computerSelection) {
             result = 'Tie Game!';
         }
         else if (playerSelection === 'rock' && computerSelection === 'paper') {
-            result = 'Computer wins! Paper beats rock';
+            result = `Computer wins! ${computerSelection} beats ${playerSelection}`;
         }
         else if (playerSelection === 'rock' && computerSelection === 'scissors') {
             result = 'You win! Computer sucks!';
@@ -72,19 +70,73 @@ function playRound(playerSelection, computerSelection) {
             result = 'Tie Game!';
         }
         else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-            result = 'Computer wins! Scissors beats paper ';
+            result = `Computer wins! ${computerSelection} beats ${playerSelection}`;
         }
         else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-            result = 'Computer wins! Rock beats scissors';
+            result = `Computer wins! ${computerSelection} beats ${playerSelection}`;
         }
         else if (playerSelection === 'scissors' && computerSelection === 'paper') {
             result = 'You win! Computer sucks!';
         }
         else if (playerSelection === 'scissors' && computerSelection === 'scissors') {
             result = 'Tie Game!';
-        }
+        };
+
+        console.log(result);
 
         return result;
 }
 
-console.log(result);
+let score = {
+    wins: 0,
+    losses: 0,
+};
+
+function updateScore(result) {
+    
+    if (result === 'You win! Computer sucks!') {
+        score.wins += 1;
+    }
+    else if (result === 'Tie Game!') {
+        score = score;
+    }
+    else if (result === `Computer wins! ${computerSelection} beats ${playerSelection}`) {
+        score.losses += 1;
+    };
+
+    console.log(score)
+
+    return score;
+};
+
+updateScore(result);
+
+
+function game() {
+    playerSelection = getPlayerChoice();
+    computerSelection = getComputerChoice();
+    result = playRound(playerSelection, computerSelection);
+    updateScore(result);
+
+    playerSelection = getPlayerChoice();
+    computerSelection = getComputerChoice();
+    result = playRound(playerSelection, computerSelection);
+    updateScore(result);
+
+    playerSelection = getPlayerChoice();
+    computerSelection = getComputerChoice();
+    result = playRound(playerSelection, computerSelection);
+    updateScore(result);
+
+    playerSelection = getPlayerChoice();
+    computerSelection = getComputerChoice();
+    result = playRound(playerSelection, computerSelection);
+    updateScore(result);
+
+    playerSelection = getPlayerChoice();
+    computerSelection = getComputerChoice();
+    result = playRound(playerSelection, computerSelection);
+    updateScore(result);
+  };
+
+game();
