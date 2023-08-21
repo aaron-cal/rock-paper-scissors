@@ -1,3 +1,24 @@
+/*
+const rockButton = document.querySelector('#rockbutton');
+const paperButton = document.querySelector('#paperbutton');
+const scissorsButton = document.querySelector('#scissorsbutton');
+const choiceButtons = document.querySelectorAll('[data-selection')
+
+choiceButtons.forEach(choiceButtons => {
+    choiceButtons.addEventListener('click', e=> {
+        const playerSelection = choiceButtons.dataset.selection
+        getPlayerChoice(playerSelection)
+    })
+})
+
+let playerSelection = getPlayerChoice()
+
+function getPlayerChoice(playerSelection) {
+    console.log(playerSelection) 
+    return playerSelection
+}*/
+
+
 let computerSelection = getComputerChoice();
 
 let randomNum = Math.random();
@@ -26,6 +47,7 @@ function getComputerChoice() {
 }
 
 
+
 let playerSelection = getPlayerChoice()
 
 function getPlayerChoice() {
@@ -43,8 +65,8 @@ function getPlayerChoice() {
         }
 
         return playerSelection
-
-}
+    }
+    
 
 
 let result = playRound(playerSelection, computerSelection)
@@ -82,7 +104,7 @@ function playRound(playerSelection, computerSelection) {
             result = 'Tie Game!';
         };
 
-        console.log(result);
+          console.log(result); 
 
         return result;
 }
@@ -111,7 +133,23 @@ function updateScore(result) {
 
 updateScore(result);
 
+let gameResult = ''
 
+function endGame(score) {
+
+    if (score.wins === 5) {
+        gameResult = 'You beat the computer! Congrats';
+    }
+    else if (score.losses === 5) {
+        gameResult = 'Computer owns you lmao.';
+    };
+
+    console.log(gameResult);
+
+    return gameResult;
+}
+
+/*
 function game() {
     playerSelection = getPlayerChoice();
     computerSelection = getComputerChoice();
@@ -137,6 +175,26 @@ function game() {
     computerSelection = getComputerChoice();
     result = playRound(playerSelection, computerSelection);
     updateScore(result);
-  };
+  };*/
 
-game();
+  function game() {
+    while(gameResult == '' ) {
+        playerSelection = getPlayerChoice();
+        computerSelection = getComputerChoice();
+        result = playRound(playerSelection, computerSelection);
+        updateScore(result);
+        endGame(score);
+    }
+  }
+
+/*
+  function game() {
+    for (score = 0; score <= 5; score++) {
+        playerSelection = getPlayerChoice();
+    computerSelection = getComputerChoice();
+    result = playRound(playerSelection, computerSelection);
+    updateScore(result);
+    }
+  }*/
+
+game()
