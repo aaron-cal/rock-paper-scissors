@@ -18,14 +18,18 @@ function getPlayerChoice(playerSelection) {
     return playerSelection
 }*/
 
+/*
+let computerSelection = getComputerChoice();*/
 
-let computerSelection = getComputerChoice();
+let computerSelection = ''
 
 let randomNum = Math.random();
 
+
+
 function getComputerChoice() {
 
-    let randomNum = Math.random()
+    let randomNum = Math.random();
 
     let computerSelection = '';
 
@@ -47,8 +51,11 @@ function getComputerChoice() {
 }
 
 
+/*
+let playerSelection = getPlayerChoice() */
 
-let playerSelection = getPlayerChoice()
+let playerSelection = ''
+
 
 function getPlayerChoice() {
     
@@ -130,8 +137,8 @@ function updateScore(result) {
 
     return score;
 };
-
-updateScore(result);
+/*
+updateScore(result);*/
 
 let gameResult = ''
 
@@ -178,12 +185,16 @@ function game() {
   };*/
 
   function game() {
-    while(gameResult == '' ) {
+    while(gameResult == '' && playerSelection !== 'quit' && playerSelection !== 'q' ) {
         playerSelection = getPlayerChoice();
         computerSelection = getComputerChoice();
         result = playRound(playerSelection, computerSelection);
         updateScore(result);
         endGame(score);
+    }
+
+    if (playerSelection === 'quit' || playerSelection === 'q') {
+        console.log('Are you scared of losing to a computer?!')
     }
   }
 
