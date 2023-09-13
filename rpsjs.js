@@ -1,25 +1,12 @@
-/*
 const rockButton = document.querySelector('#rockbutton');
 const paperButton = document.querySelector('#paperbutton');
 const scissorsButton = document.querySelector('#scissorsbutton');
-const choiceButtons = document.querySelectorAll('[data-selection')
-
-choiceButtons.forEach(choiceButtons => {
-    choiceButtons.addEventListener('click', e=> {
-        const playerSelection = choiceButtons.dataset.selection
-        getPlayerChoice(playerSelection)
-    })
-})
-
-let playerSelection = getPlayerChoice()
-
-function getPlayerChoice(playerSelection) {
-    console.log(playerSelection) 
-    return playerSelection
-}*/
-
-/*
-let computerSelection = getComputerChoice();*/
+const resetButton = document.querySelector('.resetbutton');
+const resultSec = document.querySelector('.roundresults');
+const scoreBoard = document.querySelector('.scorecard');
+const winsCount = document.querySelector('#wins');
+const lossesCount = document.querySelector('#losses');
+const resultOfGame = document.querySelector('.gameresults')
 
 let computerSelection = ''
 
@@ -45,38 +32,12 @@ function getComputerChoice() {
             computerSelection='scissors';
         }
 
-        console.log(computerSelection);
-
         return computerSelection
 }
 
-
-/*
-let playerSelection = getPlayerChoice() */
-
 let playerSelection = ''
 
-
-function getPlayerChoice() {
-    
-    let playerSelection = prompt('Rock, Paper, or Scissors?').toLowerCase();
-
-        if (playerSelection === 'rock') {
-            console.log('rock');
-        }
-        else if (playerSelection === 'paper') {
-            console.log('paper');
-        }
-        else if (playerSelection === 'scissors') {
-            console.log('scissors');
-        }
-
-        return playerSelection
-    }
-    
-
-
-let result = playRound(playerSelection, computerSelection)
+let result = ''
 
 function playRound(playerSelection, computerSelection) {
 
@@ -87,7 +48,7 @@ function playRound(playerSelection, computerSelection) {
             result = 'Tie Game!';
         }
         else if (playerSelection === 'rock' && computerSelection === 'paper') {
-            result = `Computer wins! ${computerSelection} beats ${playerSelection}`;
+            result = `Computer wins! You suck lmao!`;
         }
         else if (playerSelection === 'rock' && computerSelection === 'scissors') {
             result = 'You win! Computer sucks!';
@@ -99,10 +60,10 @@ function playRound(playerSelection, computerSelection) {
             result = 'Tie Game!';
         }
         else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-            result = `Computer wins! ${computerSelection} beats ${playerSelection}`;
+            result = `Computer wins! You suck lmao!`;
         }
         else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-            result = `Computer wins! ${computerSelection} beats ${playerSelection}`;
+            result = `Computer wins! You suck lmao!`;
         }
         else if (playerSelection === 'scissors' && computerSelection === 'paper') {
             result = 'You win! Computer sucks!';
@@ -111,7 +72,7 @@ function playRound(playerSelection, computerSelection) {
             result = 'Tie Game!';
         };
 
-          console.log(result); 
+        resultSec.innerHTML = `You chose ${playerSelection}, Computer chose ${computerSelection}. ${result}`; 
 
         return result;
 }
@@ -125,20 +86,22 @@ function updateScore(result) {
     
     if (result === 'You win! Computer sucks!') {
         score.wins += 1;
+        
     }
     else if (result === 'Tie Game!') {
         score = score;
     }
-    else if (result === `Computer wins! ${computerSelection} beats ${playerSelection}`) {
+    else if (result === `Computer wins! You suck lmao!`) {
         score.losses += 1;
     };
 
-    console.log(score)
-
     return score;
 };
-/*
-updateScore(result);*/
+
+function displayScore(){
+    winsCount.textContent = score.wins;
+    lossesCount.textContent = score.losses;
+}
 
 let gameResult = ''
 
@@ -151,61 +114,55 @@ function endGame(score) {
         gameResult = 'Computer owns you lmao.';
     };
 
-    console.log(gameResult);
-
     return gameResult;
+};
+
+function displayGameResult(){
+    resultOfGame.textContent = gameResult;
 }
 
-/*
 function game() {
-    playerSelection = getPlayerChoice();
     computerSelection = getComputerChoice();
-    result = playRound(playerSelection, computerSelection);
+    result =  playRound(playerSelection,computerSelection);
     updateScore(result);
+    displayScore();
+    endGame(score);
+    displayGameResult();
+}
 
-    playerSelection = getPlayerChoice();
-    computerSelection = getComputerChoice();
-    result = playRound(playerSelection, computerSelection);
-    updateScore(result);
-
-    playerSelection = getPlayerChoice();
-    computerSelection = getComputerChoice();
-    result = playRound(playerSelection, computerSelection);
-    updateScore(result);
-
-    playerSelection = getPlayerChoice();
-    computerSelection = getComputerChoice();
-    result = playRound(playerSelection, computerSelection);
-    updateScore(result);
-
-    playerSelection = getPlayerChoice();
-    computerSelection = getComputerChoice();
-    result = playRound(playerSelection, computerSelection);
-    updateScore(result);
-  };*/
-
-  function game() {
-    while(gameResult == '' && playerSelection !== 'quit' && playerSelection !== 'q' ) {
-        playerSelection = getPlayerChoice();
-        computerSelection = getComputerChoice();
-        result = playRound(playerSelection, computerSelection);
-        updateScore(result);
-        endGame(score);
+rockButton.addEventListener('click', () => {
+    if (gameResult === ''){
+        playerSelection = 'rock';
+        game();
+    } else {
+        alert('Game over! Press reset to start over!')
     }
+});
 
-    if (playerSelection === 'quit' || playerSelection === 'q') {
-        console.log('Are you scared of losing to a computer?!')
+paperButton.addEventListener('click', () => {
+    if (gameResult === ''){
+        playerSelection = 'paper';
+        game();
+    } else {
+        alert('Game over! Press reset to start over!')
     }
-  }
+});
 
-/*
-  function game() {
-    for (score = 0; score <= 5; score++) {
-        playerSelection = getPlayerChoice();
-    computerSelection = getComputerChoice();
-    result = playRound(playerSelection, computerSelection);
-    updateScore(result);
+scissorsButton.addEventListener('click', () => {
+    if (gameResult === ''){
+        playerSelection = 'scissors';
+        game();
+    } else {
+        alert('Game over! Press reset to start over!')
     }
-  }*/
+});
 
-game()
+resetButton.addEventListener('click', () => {
+    score.wins = 0;
+    score.losses = 0;
+    winsCount.innerHTML = 0;
+    lossesCount.innerHTML = 0;
+    resultSec.innerHTML = '   ';
+    gameResult = '';
+    resultOfGame.innerHTML = '    ';
+});
