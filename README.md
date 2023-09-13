@@ -1,1 +1,1 @@
-# rock-paper-scissors able to be played in console for now
+# first proj combining js,html, and css! Enjoy
